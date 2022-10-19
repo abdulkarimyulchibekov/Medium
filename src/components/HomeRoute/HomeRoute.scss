@@ -1,0 +1,27 @@
+.home__route {
+  padding-bottom: 10px;
+  border-bottom: 1.4px solid #aaa;
+}
+
+.line {
+  display: none;
+}
+
+.active-home-link {
+  color: #000;
+  text-decoration: none;
+}
+
+.active-home-link~.line {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background-color: #000;
+  position: relative;
+  bottom: -21.5px;
+}
+
+.home-link {
+  color: grey;
+  text-decoration: none;
+}

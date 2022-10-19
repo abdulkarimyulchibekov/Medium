@@ -1,0 +1,19 @@
+.main {
+  margin-left: 230px;
+  width: 715px;
+  margin-right: 100px;
+}
+
+.ant-message>div {
+  z-index: 1000000000;
+  background-color: #333;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fff;
+  padding: 30px;
+}

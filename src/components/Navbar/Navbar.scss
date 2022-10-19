@@ -1,0 +1,21 @@
+.link>button>svg {
+  fill: grey;
+}
+
+.active-link>button>svg {
+  fill: #000;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px 20px 20px 10px;
+  background-color: #fff;
+  border-right: 1.4px solid #333;
+  height: 100vh;
+}
