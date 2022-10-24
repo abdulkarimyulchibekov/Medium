@@ -1,26 +1,17 @@
-import React from 'react';
-import { SavedItem } from '../../components/SavedItem/SavedItem';
-import { IData } from '../../Data/Interfaces';
-import { useSavedStore } from '../../Data/SavedStore';
+import { Route, Routes } from 'react-router-dom';
+import { SaveHeader } from '../../components/SaveHeader/SaveHeader';
+import { SaveMain } from '../../layouts/SaveMain/SaveMain';
+import { SaveSecondary } from '../../layouts/SaveSecondary/SaveSecondary';
 import './save.scss';
 
 export const Save = () => {
-	const saved = useSavedStore((state: any) => state.saved);
-	console.log(saved);
 	return (
-		<div>
-			{saved.length ? (
-				<>
-					<p className='saved__error'>Your saved articles :)</p>
-					<ul>
-						{saved.map((e: IData) => (
-							<SavedItem list={saved} e={e} />
-						))}
-					</ul>
-				</>
-			) : (
-				<p className='saved__error'>You haven't got any saved Article </p>
-			)}
-		</div>
+		<>
+			<SaveHeader />
+			<Routes>
+				<Route index element={<SaveMain />} />
+				<Route path='highlights' element={<SaveSecondary />} />
+			</Routes>
+		</>
 	);
 };

@@ -14,7 +14,9 @@ export const HomeForYou = () => {
 					))}
 				</List>
 			) : (
-				<>505 Error No Data or InterNet Please Check Your Connection</>
+				<p className='saved_error'>
+					505 Error No Data or InterNet Please Check Your Connection
+				</p>
 			)}
 		</div>
 	);

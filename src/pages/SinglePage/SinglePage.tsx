@@ -10,12 +10,25 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import SimpleSnackbar from '../../components/Snackbar/Snackbar';
 import { SinglePageMain } from '../../components/SinglePageMain/SinglePageMain';
 import { useDataStore } from '../../Data/DataStore';
+import { IData } from '../../Data/Interfaces';
+import { useSavedStore } from '../../Data/SavedStore';
 
 export const SinglePage = () => {
 	const { id } = useParams();
 	const [open, setOpen] = React.useState(false);
+	const [snackOpen, setSnackOpen] = React.useState(false);
 	const data = useDataStore((state: any) => state.data);
-	const datas = data[Number(id) - 1];
+	console.log(id);
+	console.log(data);
+	const datas = data.find((e: IData) => e.id === Number(id));
+	console.log(datas);
+
+	const addSaved = useSavedStore((state: any) => state.addSaved);
+
+	const handleAdd = (item: IData) => {
+		addSaved(item);
+		setSnackOpen(true);
+	};
 
 	const handleClick = () => {
 		let url = document.location.href;
@@ -40,7 +53,7 @@ export const SinglePage = () => {
 				<img
 					width={32}
 					height={32}
-					src={`https://picsum.photos/id/${datas.id * 10}/72`}
+					src={`https://picsum.photos/id/${datas.id * 5}/72`}
 					alt={datas.title}
 					style={{ borderRadius: '50%' }}
 				/>
@@ -62,7 +75,7 @@ export const SinglePage = () => {
 					justifyContent={'space-between'}
 					alignItems={'center'}>
 					<img
-						src={`https://picsum.photos/id/${datas.id * 10}/72`}
+						src={`https://picsum.photos/id/${datas.id * 5}/72`}
 						alt={datas.title}
 						width={48}
 						height={48}
@@ -106,7 +119,7 @@ export const SinglePage = () => {
 					<IconButton onClick={handleClick} style={{ marginRight: 25 }}>
 						<LinkIcon />
 					</IconButton>
-					<IconButton>
+					<IconButton onClick={() => handleAdd(datas)}>
 						<BookmarkAddIcon />
 					</IconButton>
 					<IconButton>
@@ -115,6 +128,11 @@ export const SinglePage = () => {
 				</Stack>
 			</Stack>
 			<SimpleSnackbar open={open} setOpen={setOpen} message={'Link Copied !'} />
+			<SimpleSnackbar
+				open={snackOpen}
+				setOpen={setSnackOpen}
+				message={'Saved !'}
+			/>
 			<SinglePageMain data={datas} />
 		</div>
 	);

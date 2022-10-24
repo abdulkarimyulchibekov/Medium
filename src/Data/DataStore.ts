@@ -1,6 +1,6 @@
 import create from 'zustand';
-import { persist } from 'zustand/middleware';
 import { IData } from './Interfaces';
+
 let dataStore: any = (set: any) => ({
 	data: [
 		{
@@ -159,7 +159,9 @@ let dataStore: any = (set: any) => ({
 			saved: false,
 		},
 	],
+	addData: (data: IData) =>
+		set((state: any) => ({ data: [...state.data, data] })),
+	deleteData: (arr: IData[]) => set((state: any) => ({ data: arr })),
 });
 
-dataStore = persist(dataStore, { name: 'data' });
 export const useDataStore = create(dataStore);

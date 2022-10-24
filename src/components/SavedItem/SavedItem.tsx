@@ -10,10 +10,9 @@ import { useState } from 'react';
 
 interface IProps {
 	e: IData;
-	list: IData[];
 }
 
-export const SavedItem = ({ e, list }: IProps) => {
+export const SavedItem = ({ e }: IProps) => {
 	const addSaved = useSavedStore((state: any) => state.addSaved);
 	const deleteSaved = useSavedStore((state: any) => state.deleteSaved);
 	const saved = useSavedStore((state: any) => state.saved);
@@ -31,7 +30,7 @@ export const SavedItem = ({ e, list }: IProps) => {
 							className='item__img'
 							width={24}
 							height={24}
-							src={`https://picsum.photos/id/${e.id * 10}/72`}
+							src={`https://picsum.photos/id/${e.id * 5}/72`}
 							alt='photo of user'
 						/>
 						<span className='item__name'>{e.name}</span>
@@ -46,7 +45,12 @@ export const SavedItem = ({ e, list }: IProps) => {
 								{e.first_content[1]}
 							</Typography>
 						</Box>
-						<img width={112} height={112} src={e.image1} alt={e.title} />
+						<img
+							width={112}
+							height={112}
+							src={e.image1 || 'https://picsum.photos/112/72'}
+							alt={e.title}
+						/>
 					</Stack>
 				</Stack>
 			</Link>

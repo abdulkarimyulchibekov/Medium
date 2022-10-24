@@ -1,26 +1,41 @@
-import { IData } from '../../Data/Interfaces';
+import { IData, IList } from '../../Data/Interfaces';
 import { Link } from 'react-router-dom';
 import { ListItem, Stack, Typography, IconButton, Box } from '@mui/material';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
-import './item.scss';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import { useSavedStore } from '../../Data/SavedStore';
 import SimpleSnackbar from '../Snackbar/Snackbar';
 import { useState } from 'react';
+import './item.scss';
+import { useListsStore } from '../../Data/ListsStore';
 
 interface IProps {
 	e: IData;
 }
 
 export const Item = ({ e }: IProps) => {
-	const addSaved = useSavedStore((state: any) => state.addSaved);
+	const addList = useListsStore((state: any) => state.addListsStore);
+	const deleteList = useListsStore((state: any) => state.deleteListsStore);
 	const saved = useSavedStore((state: any) => state.saved);
+	const list = useListsStore((state: any) => state.listsStore);
+	const i = list.filter((item: IList) =>
+		item.stories?.find((el) => el.id == e.id),
+	);
+
 	const handleAdd = (item: IData) => {
-		addSaved(item);
-		setOpen(true);
+		if (i.length) {
+			deleteList(saved.filter((item: IData) => e.id !== item.id));
+			setDeleteOpen(true);
+		} else {
+			addList(item);
+			setOpen(true);
+		}
 	};
 	const [open, setOpen] = useState(false);
+	const [deleteOpen, setDeleteOpen] = useState(false);
+
 	return (
 		<ListItem className='item' style={{}}>
 			<Link className='item__link' to={`/${e.id.toString()}`}>
@@ -30,7 +45,10 @@ export const Item = ({ e }: IProps) => {
 							className='item__img'
 							width={24}
 							height={24}
-							src={`https://picsum.photos/id/${e.id * 10}/72`}
+							src={
+								`https://picsum.photos/id/${e.id * 5}/72` ||
+								'https://picsum.photos/72'
+							}
 							alt='photo of user'
 						/>
 						<span className='item__name'>{e.name}</span>
@@ -42,10 +60,15 @@ export const Item = ({ e }: IProps) => {
 								{e.title}
 							</Typography>
 							<Typography className='item__content'>
-								{e.first_content[1]}
+								{e?.first_content[1]}
 							</Typography>
 						</Box>
-						<img width={112} height={112} src={e.image1} alt={e.title} />
+						<img
+							width={112}
+							height={112}
+							src={e.image1 || 'https://picsum.photos/72'}
+							alt={e.title}
+						/>
 					</Stack>
 				</Stack>
 			</Link>
@@ -67,8 +90,10 @@ export const Item = ({ e }: IProps) => {
 					</span>
 				</Stack>
 				<Stack direction={'row'} spacing={0} alignItems={'center'}>
-					<IconButton onClick={() => handleAdd(e)}>
-						<BookmarkAddOutlinedIcon />
+					<IconButton
+						style={i.length ? { color: 'black' } : { color: 'gray' }}
+						onClick={() => handleAdd(e)}>
+						{i.length ? <BookmarkAddIcon /> : <BookmarkAddOutlinedIcon />}
 					</IconButton>
 					<IconButton>
 						<RemoveCircleOutlineOutlinedIcon />
@@ -79,6 +104,11 @@ export const Item = ({ e }: IProps) => {
 				</Stack>
 			</Stack>
 			<SimpleSnackbar open={open} setOpen={setOpen} message='Saved !!!' />
+			<SimpleSnackbar
+				open={deleteOpen}
+				setOpen={setDeleteOpen}
+				message='Deleted !!!'
+			/>
 		</ListItem>
 	);
 };

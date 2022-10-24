@@ -18,7 +18,7 @@ export const HomeRoute = () => {
 					className={({ isActive }) =>
 						isActive ? 'active-home-link' : 'home-link'
 					}
-					to={'for-you'}>
+					to={'/home'}>
 					For you
 				</NavLink>
 				<span className='line'></span>

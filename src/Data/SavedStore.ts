@@ -1,5 +1,4 @@
 import create from 'zustand';
-import { persist } from 'zustand/middleware';
 import { IData } from './Interfaces';
 
 let SavedStore: any = (set: any) => ({
@@ -14,5 +13,4 @@ let SavedStore: any = (set: any) => ({
 	deleteSaved: (arr: IData[]) => set(() => ({ saved: arr })),
 });
 
-SavedStore = persist(SavedStore, { name: 'saved' });
 export const useSavedStore = create(SavedStore);

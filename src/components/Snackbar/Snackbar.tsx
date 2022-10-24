@@ -18,7 +18,6 @@ export default function SimpleSnackbar({ open, setOpen, message }: IProps) {
 		if (reason === 'clickaway') {
 			return;
 		}
-
 		setOpen(false);
 	};
 
@@ -38,7 +37,7 @@ export default function SimpleSnackbar({ open, setOpen, message }: IProps) {
 		<div>
 			<Snackbar
 				open={open}
-				autoHideDuration={6000}
+				autoHideDuration={3000}
 				onClose={handleClose}
 				message={message}
 				action={action}
