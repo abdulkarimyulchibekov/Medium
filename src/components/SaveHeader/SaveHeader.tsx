@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { Button, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import { NavLink } from 'react-router-dom';
+import ListCreate from '../ListCreateModal/ListModal';
 
 export const SaveHeader = () => {
+	const [open, setOpen] = useState(false);
+
 	return (
 		<>
 			<Stack
@@ -14,6 +18,9 @@ export const SaveHeader = () => {
 				<Button
 					style={{ borderRadius: 16 }}
 					variant='contained'
+					onClick={() => {
+						setOpen(true);
+					}}
 					color='success'>
 					New List
 				</Button>
@@ -45,6 +52,7 @@ export const SaveHeader = () => {
 					<span className='line'></span>
 				</div>
 			</Stack>
+			<ListCreate open={open} setOpen={setOpen} e={null} />
 		</>
 	);
 };

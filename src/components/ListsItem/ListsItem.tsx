@@ -8,13 +8,12 @@ interface IProps {
 }
 
 export const ListsItem = ({ e }: IProps) => {
-	console.log(e);
-
 	return (
 		<ListItem
 			style={{
 				background: '#eee',
 				borderRadius: 10,
+				marginBottom: 30,
 			}}>
 			<Link
 				style={{
