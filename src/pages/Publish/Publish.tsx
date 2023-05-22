@@ -12,8 +12,7 @@ export const Publish = () => {
 	const [num, setNum] = useState<number[]>([]);
 	const [value, setValue] = useState<any>('');
 	const [text, setText] = useState<string[]>([]);
-	const localId: string | null = localStorage.getItem('id');
-	const [id, setId] = useState(JSON.parse(localId ? localId : '') || 0);
+	const [id, setId] = useState<number>(1);
 	const inputRef = useRef<any>();
 	const addData = useDataStore((state: any) => state.addData);
 	const addMyStore = useMyStore((state: any) => state.addMyStore);
