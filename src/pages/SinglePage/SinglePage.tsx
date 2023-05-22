@@ -18,10 +18,7 @@ export const SinglePage = () => {
 	const [open, setOpen] = React.useState(false);
 	const [snackOpen, setSnackOpen] = React.useState(false);
 	const data = useDataStore((state: any) => state.data);
-	console.log(id);
-	console.log(data);
 	const datas = data.find((e: IData) => e.id === Number(id));
-	console.log(datas);
 
 	const addSaved = useSavedStore((state: any) => state.addSaved);
 
@@ -33,14 +30,9 @@ export const SinglePage = () => {
 	const handleClick = () => {
 		let url = document.location.href;
 
-		navigator.clipboard.writeText(url).then(
-			function () {
-				setOpen(true);
-			},
-			function () {
-				console.log('Copy error');
-			},
-		);
+		navigator.clipboard.writeText(url).then(function () {
+			setOpen(true);
+		});
 	};
 	return (
 		<div>
@@ -96,6 +88,7 @@ export const SinglePage = () => {
 						<a
 							style={{ textDecoration: 'none', color: 'gray' }}
 							target={'_blank'}
+							rel='noreferrer'
 							href={'https://twitter.com'}>
 							<TwitterIcon />
 						</a>
@@ -104,6 +97,7 @@ export const SinglePage = () => {
 						<a
 							style={{ textDecoration: 'none', color: 'gray' }}
 							target={'_blank'}
+							rel='noreferrer'
 							href={'https://facebook.com'}>
 							<FacebookIcon />
 						</a>
@@ -112,6 +106,7 @@ export const SinglePage = () => {
 						<a
 							style={{ textDecoration: 'none', color: 'gray' }}
 							target={'_blank'}
+							rel='noreferrer'
 							href={'https://linkedin.com'}>
 							<LinkedInIcon />
 						</a>

@@ -82,9 +82,6 @@ export default function ListCreate({ open, setOpen, e }: IProps) {
 							label='Give it a name'
 							variant='standard'
 							required
-							onChange={() => {
-								console.log(inputRef?.current?.value ? true : false);
-							}}
 							inputRef={inputRef}
 						/>
 						<FormControlLabel

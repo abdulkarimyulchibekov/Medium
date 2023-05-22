@@ -37,7 +37,6 @@ export const Publish = () => {
 		inputRef?.current?.focus();
 	}, [num]);
 	localStorage.setItem('id', JSON.stringify(id));
-	console.log(num);
 	return (
 		<div style={{ width: 1000, paddingTop: 20 }}>
 			<Stack
@@ -103,7 +102,6 @@ export const Publish = () => {
 										setText([...text, evt.target.value]);
 									}
 									if (evt.code === 'Backspace' && !evt.target.value.length) {
-										console.log('yes');
 										setNum((prop: any) => prop.splice(1, prop.length));
 										inputRef?.current?.previousSibling?.focus();
 									}
