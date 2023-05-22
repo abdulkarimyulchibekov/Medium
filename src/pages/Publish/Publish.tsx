@@ -67,7 +67,7 @@ export const Publish = () => {
 						width={30}
 						height={30}
 						src='https://picsum.photos/200/200'
-						alt='image'
+						alt='ok'
 						style={{
 							borderRadius: '50%',
 						}}
